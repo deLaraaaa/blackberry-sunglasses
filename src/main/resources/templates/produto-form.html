@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Formulário de Produto</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mui/material@5.14.5/dist/mui-material.min.css">
-    <link rel="stylesheet" th:href="@{/produtos-form.css}" />
+  <title>Formulário de Produto</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mui/material@5.14.5/dist/mui-material.min.css">
+  <link rel="stylesheet" th:href="@{/produtos-form.css}" />
 </head>
+
 <body>
   <div class="container">
-      <h1 th:text="${produto.id != null ? 'Editar Produto' : 'Novo Produto'}"></h1>
-      
-      <form th:action="${produto.id != null} ? @{/produtos/__${produto.id}__} : @{/produtos}" method="post">
-          <input type="hidden" th:if="${produto.id != null}" th:name="id" th:value="${produto.id}" />
-          
-          <div class="form-group">
-              <label for="nome">Nome:</label>
-              <input type="text" id="nome" name="nome" th:value="${produto.nome}" required />
-          </div>
-          
-          <div class="form-group">
-              <label for="preco">Preço:</label>
-              <input type="number" id="preco" name="preco" th:value="${produto.preco}" step="0.01" required />
-          </div>
-          
-          <div class="form-group">
-              <label for="quantidade">Quantidade:</label>
-              <input type="number" id="quantidade" name="quantidade" th:value="${produto.quantidade}" required />
-          </div>
-          
-          <div class="button-group">
-              <button type="submit" class="btn-primary">Salvar</button>
-              <a href="/produtos" class="btn-secondary">Cancelar</a>
-          </div>
-      </form>
+    <h1 th:text="${produto.id != null ? 'Editar Produto' : 'Novo Produto'}"></h1>
+
+    <form th:action="${produto.id != null} ? @{/produtos/__${produto.id}__} : @{/produtos}" method="post">
+      <input type="hidden" th:if="${produto.id != null}" th:name="id" th:value="${produto.id}" />
+
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" th:value="${produto.nome}" required />
+      </div>
+
+      <div class="form-group">
+        <label for="preco">Preço:</label>
+        <input type="number" id="preco" name="preco" th:value="${produto.preco}" step="0.01" required />
+      </div>
+
+      <div class="form-group">
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" th:value="${produto.quantidade}" required />
+      </div>
+
+      <div class="form-group">
+        <label for="categoria">Categoria:</label>
+        <select id="categoria" name="categoria.id">
+          <option value="">Selecione uma categoria</option>
+          <option th:each="cat : ${categorias}" th:value="${cat.id}" th:text="${cat.nome}"
+            th:selected="${produto.categoria != null && produto.categoria.id == cat.id}">
+          </option>
+        </select>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn-primary">Salvar</button>
+        <a href="/produtos" class="btn-secondary">Cancelar</a>
+      </div>
+    </form>
   </div>
 </body>
+
 </html>
+
 </html>

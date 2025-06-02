@@ -1,9 +1,10 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 20px;
   background-color: #f5f5f5;
 }
+
 .container {
   max-width: 600px;
   margin: 0 auto;
@@ -12,39 +13,61 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 h1 {
   margin-top: 0;
-  color: #1976d2;
+  color: #000000;
   margin-bottom: 24px;
 }
+
 .form-group {
   margin-bottom: 20px;
 }
+
 label {
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
 }
-input {
+
+input,
+select {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
-input:focus {
+
+select {
+  background-color: white;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23757575' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 35px; /* Extra space for the dropdown arrow */
+}
+
+select option {
+  padding: 8px;
+}
+
+input:focus,
+select:focus {
   outline: none;
   border-color: #1976d2;
   box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
 }
+
 .button-group {
   display: flex;
   gap: 10px;
   margin-top: 24px;
 }
+
 .btn-primary {
   background-color: #1976d2;
   color: white;
@@ -55,9 +78,11 @@ input:focus {
   font-weight: 500;
   font-size: 16px;
 }
+
 .btn-primary:hover {
   background-color: #1565c0;
 }
+
 .btn-secondary {
   background-color: #f5f5f5;
   color: rgba(0, 0, 0, 0.87);
@@ -69,6 +94,7 @@ input:focus {
   text-decoration: none;
   font-size: 16px;
 }
+
 .btn-secondary:hover {
   background-color: #e0e0e0;
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.estoque.entity.Product;
+import com.example.estoque.repository.CategoryRepository;
 import com.example.estoque.repository.ProductRepository;
 
 @Controller
@@ -16,9 +17,11 @@ import com.example.estoque.repository.ProductRepository;
 public class ProductController {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    public ProductController(ProductRepository productRepository) {
+    public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping
@@ -30,6 +33,7 @@ public class ProductController {
     @GetMapping("/novo")
     public String novoProdutoForm(Model model) {
         model.addAttribute("produto", new Product());
+        model.addAttribute("categorias", categoryRepository.findAll());
         return "produto-form";
     }
 
@@ -41,7 +45,9 @@ public class ProductController {
 
     @GetMapping("/{id}/editar")
     public String editarProdutoForm(@PathVariable Long id, Model model) {
-        model.addAttribute("produto", productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Produto não encontrado")));
+        model.addAttribute("produto", productRepository.findById(id).orElseThrow(()
+                -> new IllegalArgumentException("Produto não encontrado")));
+        model.addAttribute("categorias", categoryRepository.findAll());
         return "produto-form";
     }
 

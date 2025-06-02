@@ -1,91 +1,101 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Lista de Produtos</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mui/material@5.14.5/dist/mui-material.min.css">
-    <link rel="stylesheet" th:href="@{/produtos.css}" />
+  <title>Lista de Produtos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mui/material@5.14.5/dist/mui-material.min.css">
+  <link rel="stylesheet" th:href="@{/produtos.css}" />
 </head>
+
 <body>
   <div class="container">
     <div class="header">
-        <h1>Lista de Produtos</h1>
-        <a href="/produtos/novo" class="btn-primary">
-            <span class="material-icons icon">add</span>
-            Adicionar Produto
-        </a>
+      <h1>Lista de Produtos</h1>
+      <a href="/produtos/novo" class="btn-primary">
+        <span class="material-icons icon">add</span>
+        Adicionar Produto
+      </a>
     </div>
-    
+
     <div id="confirmDeleteModal" class="modal-overlay">
-        <div class="modal-content">
-            <h2>Confirmar Exclusão</h2>
-            <p>Tem certeza que deseja excluir este produto?</p>
-            <div class="modal-actions">
-                <button id="cancelDelete" class="btn-delete-confirm">Cancelar</button>
-                <button id="confirmDelete" class="btn-primary">Confirmar</button>
-            </div>
+      <div class="modal-content">
+        <h2>Confirmar Exclusão</h2>
+        <p>Tem certeza que deseja excluir este produto?</p>
+        <div class="modal-actions">
+          <button id="cancelDelete" class="btn-delete-confirm">Cancelar</button>
+          <button id="confirmDelete" class="btn-primary">Confirmar</button>
         </div>
+      </div>
     </div>
-    
+
     <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Preço</th>
-                <th>Quantidade</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="produto : ${produtos}">
-                <td th:text="${produto.id}"></td>
-                <td th:text="${produto.nome}"></td>
-                <td th:text="${#numbers.formatCurrency(produto.preco)}"></td>
-                <td th:text="${produto.quantidade}"></td>
-                <td class="actions">
-                    <a th:href="@{/produtos/{id}/editar(id=${produto.id})}" class="btn-edit">
-                        <span class="material-icons icon">edit</span>
-                        Editar
-                    </a>
-                    <button type="button" class="btn-delete" th:onclick="'showDeleteModal(' + ${produto.id} + ')'">
-                        <span class="material-icons icon">delete</span>
-                        Excluir
-                    </button>
-                    <form th:id="'deleteForm-' + ${produto.id}" th:action="@{/produtos/{id}/excluir(id=${produto.id})}" method="post" style="display:none;">
-                    </form>
-                </td>
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Preço</th>
+          <th>Quantidade</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="produto : ${produtos}">
+          <td th:text="${produto.id}"></td>
+          <td th:text="${produto.nome}"></td>
+          <td th:text="${#numbers.formatCurrency(produto.preco)}"></td>
+          <td th:text="${produto.quantidade}"></td>
+          <td class="actions">
+            <a th:href="@{/produtos/{id}/editar(id=${produto.id})}" class="btn-edit">
+              <span class="material-icons icon">edit</span>
+              Editar
+            </a>
+            <button type="button" class="btn-delete" th:onclick="'showDeleteModal(' + ${produto.id} + ')'">
+              <span class="material-icons icon">delete</span>
+              Excluir
+            </button>
+            <form th:id="'deleteForm-' + ${produto.id}" th:action="@{/produtos/{id}/excluir(id=${produto.id})}"
+              method="post" style="display:none;">
+            </form>
+          </td>
+        </tr>
+      </tbody>
     </table>
-</div>
-<script>
+    <div class="navigation-links" style="margin-top: 20px;">
+      <a href="/categorias" class="btn-primary">
+        <span class="material-icons icon">category</span>
+        Gerenciar Categorias
+      </a>
+    </div>
+  </div>
+  <script>
     let currentProductId = null;
-    
+
     function showDeleteModal(productId) {
-        currentProductId = productId;
-        document.getElementById('confirmDeleteModal').style.display = 'flex';
+      currentProductId = productId;
+      document.getElementById('confirmDeleteModal').style.display = 'flex';
     }
-    
-    document.getElementById('cancelDelete').addEventListener('click', function() {
-        document.getElementById('confirmDeleteModal').style.display = 'none';
+
+    document.getElementById('cancelDelete').addEventListener('click', function () {
+      document.getElementById('confirmDeleteModal').style.display = 'none';
     });
-    
-    document.getElementById('confirmDelete').addEventListener('click', function() {
-        if (currentProductId) {
-            document.getElementById('deleteForm-' + currentProductId).submit();
-        }
+
+    document.getElementById('confirmDelete').addEventListener('click', function () {
+      if (currentProductId) {
+        document.getElementById('deleteForm-' + currentProductId).submit();
+      }
     });
-    
+
     // Close modal if clicking outside the modal content
-    document.getElementById('confirmDeleteModal').addEventListener('click', function(event) {
-        if (event.target === this) {
-            this.style.display = 'none';
-        }
+    document.getElementById('confirmDeleteModal').addEventListener('click', function (event) {
+      if (event.target === this) {
+        this.style.display = 'none';
+      }
     });
-</script>
+  </script>
 </body>
+
 </html>
