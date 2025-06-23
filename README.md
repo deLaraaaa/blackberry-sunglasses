@@ -35,7 +35,7 @@ Desenvolver um sistema web completo para gerenciamento de estoque que permite co
 - **Navegação intuitiva** - Links entre produtos e categorias
 - **Persistência de dados** - Banco H2 com JPA
 
-### Descreva as principais classes e telas e seu funcionamento
+### Principais classes e telas e seu funcionamento
 
 #### Classes Principais:
 
@@ -92,7 +92,7 @@ Desenvolver um sistema web completo para gerenciamento de estoque que permite co
 - **Validação**: Campo obrigatório
 - **Comportamento**: Reutilizado para criar e editar
 
-### Observações (Alguma orientação de como rodar o sistema)
+### Observações (Orientações de como rodar o sistema)
 
 #### Pré-requisitos:
 - Java 21 ou superior
