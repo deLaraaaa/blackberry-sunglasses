@@ -11,7 +11,7 @@ A simple inventory management system built with Spring Boot that allows users to
 **Sistema de Gerenciamento de Estoque (Blackberry Sunglasses)**
 
 ### Objetivo
-Desenvolver um sistema web completo para gerenciamento de estoque que permite controlar produtos e categorias de forma eficiente, oferecendo uma interface moderna e intuitiva para operações CRUD (Create, Read, Update, Delete).
+Desenvolver um sistema web simples para gerenciamento de estoque que permite controlar produtos e categorias com foco no aprendizado, oferecendo uma interface intuitiva para operações CRUD (Create, Read, Update, Delete).
 
 ### Principais requisitos e/ou casos de uso implementados
 
