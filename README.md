@@ -2,85 +2,133 @@
 
 A simple inventory management system built with Spring Boot that allows users to manage products and categories.
 
-## Features
+## Project Information / Informações do Projeto
 
-- Product management (create, read, update, delete)
-- Category management (create, read, update, delete)
-- Relational data between products and categories
-- Modern UI with Material Design styling
+### Integrantes
+- **Desenvolvedor**: Leonardo, Matheus Sady, Rafael de Lara e Rafael Venturi 
 
-## Technologies Used
+### Projeto
+**Sistema de Gerenciamento de Estoque (Blackberry Sunglasses)**
 
-- **Backend**: Java with Spring Boot 3.4.5
-- **Database**: H2 in-memory database
-- **Frontend**: Thymeleaf, HTML, CSS
-- **UI Components**: Material Design icons and styling
+### Objetivo
+Desenvolver um sistema web completo para gerenciamento de estoque que permite controlar produtos e categorias de forma eficiente, oferecendo uma interface moderna e intuitiva para operações CRUD (Create, Read, Update, Delete).
 
-## Project Structure
+### Principais requisitos e/ou casos de uso implementados
 
-- `src/main/java/com/example/estoque/`
-  - `controller/` - Contains controllers for handling HTTP requests
-  - `entity/` - JPA entity classes
-  - `repository/` - Spring Data JPA repositories
-- `src/main/resources/`
-  - `static/` - CSS stylesheets
-  - `templates/` - Thymeleaf HTML templates
-  - `application.properties` - Application configuration
+#### Gestão de Produtos:
+- **Listar produtos** - Visualização de todos os produtos em tabela
+- **Cadastrar produto** - Formulário para adicionar novos produtos
+- **Editar produto** - Modificação de dados existentes
+- **Excluir produto** - Remoção com confirmação via modal
+- **Associação com categorias** - Produtos vinculados a categorias
 
-## Prerequisites
+#### Gestão de Categorias:
+- **Listar categorias** - Visualização de todas as categorias
+- **Cadastrar categoria** - Formulário para adicionar novas categorias
+- **Editar categoria** - Modificação de dados existentes
+- **Excluir categoria** - Remoção com confirmação via modal
+- **Contagem de produtos** - Exibição da quantidade de produtos por categoria
 
-- Java 21 or higher
-- Maven 3.6+ (or use the included Maven wrapper)
+#### Funcionalidades Técnicas:
+- **Interface responsiva** - Design adaptável com Material Design
+- **Validação de dados** - Tratamento de erros e validações
+- **Navegação intuitiva** - Links entre produtos e categorias
+- **Persistência de dados** - Banco H2 com JPA
 
-## Getting Started
+### Descreva as principais classes e telas e seu funcionamento
 
-### Running the Application
+#### Classes Principais:
 
-1. Clone the repository:
+**Entidades (Entity):**
+- **`Product.java`**: Representa um produto com atributos: id, nome, quantidade, preço e categoria
+- **`Category.java`**: Representa uma categoria com id, nome e lista de produtos associados
 
- - git clone `https://github.com/deLaraaaa/blackberry-sunglasses` 
-   - cd blackberry-sunglasses
+**Controladores (Controller):**
+- **`ProductController.java`**: Gerencia todas as operações HTTP relacionadas a produtos
+  - `GET /produtos` - Lista todos os produtos
+  - `GET /produtos/novo` - Exibe formulário de cadastro
+  - `POST /produtos` - Salva novo produto
+  - `GET /produtos/{id}/editar` - Exibe formulário de edição
+  - `POST /produtos/{id}` - Atualiza produto existente
+  - `POST /produtos/{id}/excluir` - Remove produto
 
-2. Run the application using Maven:
+- **`CategoryController.java`**: Gerencia operações HTTP relacionadas a categorias
+  - `GET /categorias` - Lista todas as categorias
+  - `GET /categorias/nova` - Exibe formulário de cadastro
+  - `POST /categorias` - Salva nova categoria
+  - `GET /categorias/{id}/editar` - Exibe formulário de edição
+  - `POST /categorias/{id}` - Atualiza categoria existente
+  - `POST /categorias/{id}/excluir` - Remove categoria
 
- - `./mvnw spring-boot:run` or `mvn spring-boot:run`
+**Repositórios (Repository):**
+- **`ProductRepository.java`**: Interface para operações de banco com produtos
+- **`CategoryRepository.java`**: Interface para operações de banco com categorias
 
-For Windows users:
+#### Telas e Funcionamento:
 
- - mvnw.cmd spring-boot:run
+**1. Lista de Produtos (`produtos.html`):**
+- **Funcionalidade**: Exibe tabela com todos os produtos cadastrados
+- **Campos**: ID, Nome, Preço, Quantidade, Ações
+- **Ações**: Botões para Editar e Excluir cada produto
+- **Navegação**: Link para "Adicionar Produto" e "Gerenciar Categorias"
+- **Modal**: Confirmação antes de excluir produtos
 
-3. Access the application in your web browser:
-http://localhost:8081
+**2. Formulário de Produto (`produto-form.html`):**
+- **Funcionalidade**: Formulário para cadastrar/editar produtos
+- **Campos**: Nome, Preço, Quantidade, Categoria (dropdown)
+- **Validação**: Campos obrigatórios e formatação de preço
+- **Comportamento**: Reutilizado para criar e editar
 
+**3. Lista de Categorias (`categorias.html`):**
+- **Funcionalidade**: Exibe tabela com todas as categorias
+- **Campos**: ID, Nome, Quantidade de Produtos, Ações
+- **Ações**: Botões para Editar e Excluir cada categoria
+- **Navegação**: Link para "Adicionar Categoria" e "Gerenciar Produtos"
+- **Modal**: Confirmação antes de excluir categorias
 
-### Using the Application
+**4. Formulário de Categoria (`categoria-form.html`):**
+- **Funcionalidade**: Formulário para cadastrar/editar categorias
+- **Campos**: Nome da categoria
+- **Validação**: Campo obrigatório
+- **Comportamento**: Reutilizado para criar e editar
 
-#### Products Management
-- View all products at `/produtos`
-- Add a new product at `/produtos/novo`
-- Edit a product at `/produtos/{id}/editar`
-- Delete products using the delete button in the product list
+### Observações (Alguma orientação de como rodar o sistema)
 
-#### Categories Management
-- View all categories at `/categorias`
-- Add a new category at `/categorias/nova`
-- Edit a category at `/categorias/{id}/editar`
-- Delete categories using the delete button in the category list
+#### Pré-requisitos:
+- Java 21 ou superior
+- Maven 3.6+ (ou usar o wrapper incluído)
 
-## Database
+#### Como executar:
 
-The application uses an H2 in-memory database. You can access the H2 console at:
-http://localhost:8081/h2-console
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/deLaraaaa/blackberry-sunglasses
+   cd blackberry-sunglasses
+   ```
 
+2. **Execute com Maven:**
+   ```bash
+   # Linux/Mac:
+   ./mvnw spring-boot:run
+   
+   # Windows:
+   mvnw.cmd spring-boot:run
+   
+   # Ou com Maven instalado:
+   mvn spring-boot:run
+   ```
 
-Database connection settings:
-- JDBC URL: `jdbc:h2:mem:estoque_db`
-- Username: `sa`
-- Password: (leave empty)
+3. **Acesse a aplicação:**
+   - URL principal: http://localhost:8081
+   - Lista de produtos: http://localhost:8081/produtos
+   - Lista de categorias: http://localhost:8081/categorias
+   - Console H2: http://localhost:8081/h2-console
 
-## Notes
-
-- This is a demo application with an in-memory database. Data will be lost when the application is restarted.
+#### Configuração do Banco:
+- **Tipo**: H2 (banco em memória)
+- **URL**: `jdbc:h2:mem:estoque_db`
+- **Usuário**: `sa`
+- **Senha**: (deixar vazio)
 
 ## License
 
